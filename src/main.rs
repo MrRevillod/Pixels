@@ -1,10 +1,8 @@
 
 mod cli;
 mod types;
+mod utils;
 mod errors;
-mod validations;
-
-use validations::validate_args;
 
 use clap::Parser;
 
@@ -17,14 +15,14 @@ struct Args {
     #[arg(short, long)]
     rename: Option<String>,
     #[arg(short, long)]
-    compress: Option<u8>,
+    quality: Option<u8>,
 }
 
 fn main() {
 
     let args = Args::parse();
 
-    if let Err(e) = validate_args(&args) {
+    if let Err(e) = cli::run(&args) {
         errors::exit(&e);
     }
 }

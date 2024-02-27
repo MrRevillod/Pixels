@@ -4,6 +4,7 @@ pub enum CliError {
     FileDontExist,
     ThePathIsNotAFile,
     InvalidMimeType,
+    InvalidQuality,
 }
 
 impl CliError {
@@ -15,6 +16,7 @@ impl CliError {
             CliError::FileDontExist => "The file doesn't exist",
             CliError::ThePathIsNotAFile => "The path is not a file",
             CliError::InvalidMimeType => "The file is not a valid image",
+            CliError::InvalidQuality => "The quality must be between 1 and 100",
         }
     }
 }
