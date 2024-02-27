@@ -1,9 +1,10 @@
 
+use std::fs;
+use webp::*;
+
 use crate::Args;
 use crate::utils::*;
 use crate::types::*;
-
-use webp::*;
 
 pub fn run(args: &Args) -> CliResult<()> { 
 
@@ -11,7 +12,7 @@ pub fn run(args: &Args) -> CliResult<()> {
     
     validate_mime_type(&img_path)?;
 
-    let renamed = get_path_from_rename(&img_path, &args.rename);
+    let renamed = get_output_path(&img_path, &args.rename);
 
     let quality = normalize_quality(args.quality)?;
 
@@ -21,7 +22,7 @@ pub fn run(args: &Args) -> CliResult<()> {
     let webp: WebPMemory = encoder.encode(quality as f32);
     let output_path = renamed.with_extension("webp");
     
-    std::fs::write(&output_path, &*webp).unwrap();
+    fs::write(&output_path, &*webp).unwrap();
 
     Ok(())
 }

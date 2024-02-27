@@ -1,5 +1,4 @@
 
-
 use std::env;
 use std::path::PathBuf;
 
@@ -27,16 +26,35 @@ pub fn get_path_from_input(path: &str) -> CliResult<PathBuf> {
     Ok(path)
 }
 
-pub fn get_path_from_rename(og_path: &PathBuf, rename: &Option<String>) -> PathBuf {
+pub fn get_output_path(og_path: &PathBuf, rename: &Option<String>) -> PathBuf {
+    
+    let output_path = env::current_dir().unwrap();
+    let filename = rename.clone().unwrap_or_else(|| clean_filename(og_path));
 
-    let mut path = og_path.clone();
+    let renamed = output_path.join(&filename).with_extension("webp");
 
-    if let Some(rename) = rename {
-        let clean_filename = rename.split(".").collect::<Vec<&str>>()[0];
-        path.set_file_name(clean_filename);
+    if renamed.exists() {
+        return create_unique_filename(output_path, filename);
     }
 
-    path
+    renamed
+}
+
+fn create_unique_filename(output_path: PathBuf, filename: String) -> PathBuf {
+    
+    let mut i = 1;
+
+    loop {
+        
+        let new_name = format!("{}-{}", filename, i);
+        let new_path = output_path.join(new_name).with_extension("webp");
+
+        if !new_path.exists() {
+            return new_path;
+        }
+
+        i += 1;
+    }
 }
 
 pub fn validate_mime_type(path: &PathBuf) -> CliResult<()> {
@@ -61,3 +79,6 @@ pub fn normalize_quality(quality: Option<u8>) -> CliResult<u8> {
     Ok(quality.unwrap_or(DEFAULT_QUALITY))
 }
 
+pub fn clean_filename(path: &PathBuf) -> String {
+    path.file_stem().unwrap().to_str().unwrap().to_string()
+}
