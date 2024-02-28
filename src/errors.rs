@@ -13,10 +13,10 @@ impl CliError {
 
         match self {
 
-            CliError::FileDontExist => "The file doesn't exist",
-            CliError::ThePathIsNotAFile => "The path is not a file",
-            CliError::InvalidMimeType => "The file is not a valid image",
-            CliError::InvalidQuality => "The quality must be between 1 and 100",
+            CliError::FileDontExist => "[x] Error: The file doesn't exist",
+            CliError::ThePathIsNotAFile => "[x] Error: The path is not a file",
+            CliError::InvalidMimeType => "[x] Error: The file is not a valid image",
+            CliError::InvalidQuality => "[x] Error: The quality must be between 1 and 100",
         }
     }
 }

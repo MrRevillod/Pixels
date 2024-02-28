@@ -1,6 +1,6 @@
 
 use std::env;
-use std::path::PathBuf;
+use std::path::{PathBuf, Path};
 
 use crate::types::*;
 use crate::errors::CliError;
@@ -28,7 +28,7 @@ pub fn get_path_from_input(path: &str) -> CliResult<PathBuf> {
 
 pub fn get_output_path(og_path: &PathBuf, rename: &Option<String>) -> PathBuf {
     
-    let output_path = env::current_dir().unwrap();
+    let output_path = og_path.parent().unwrap();
     let filename = rename.clone().unwrap_or_else(|| clean_filename(og_path));
 
     let renamed = output_path.join(&filename).with_extension("webp");
@@ -40,7 +40,7 @@ pub fn get_output_path(og_path: &PathBuf, rename: &Option<String>) -> PathBuf {
     renamed
 }
 
-fn create_unique_filename(output_path: PathBuf, filename: String) -> PathBuf {
+fn create_unique_filename(output_path: &Path, filename: String) -> PathBuf {
     
     let mut i = 1;
 

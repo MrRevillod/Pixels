@@ -14,7 +14,7 @@
 ## Installation
 
 ```bash
-cargo pixels
+cargo install pixels-cli
 ```
 
 ## Usage
@@ -28,4 +28,12 @@ pixels --input <input> --rename <filename> --quality <quality>
 - `--input` or `-i`: The input file or directory
 - `--rename` or `-r`: The new filename, only new filename without extension
 
-- `--quality` or `-q`: The quality of the image, from 0 to 100
+- `--quality` or `-q`: The quality of the image, from 1 to 80 (default 80), can be higher until 100, but it's not recommended because the file size will be too big.
+
+## Optional
+
+If the name **pixels-cli** is too long for you, you can create an alias for the command, in this case for bash:
+
+```bash
+echo "alias your-alias=pixels-cli" >> ~/.bashrc
+```
