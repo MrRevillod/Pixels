@@ -1,6 +1,7 @@
 
 use std::fs;
 use std::path::PathBuf;
+
 use webp::*;
 
 use crate::Args;
@@ -35,10 +36,14 @@ fn stats(input: &PathBuf, output: &PathBuf) {
 
     let diff = input_size - output_size;
 
-    println!("\n[-] Input size: {}KB", input_size);
-    println!("[-] Output size: {}KB", output_size);
-    println!("[-] Compressed: {}KB", diff);
+    println!("");
+    println!("{} Initial image size: {}Kb", *TERM_INFO, input_size);
+    println!("{} Final image size: {}Kb", *TERM_INFO, output_size);
+    println!("{} Compressed: {}Kb", *TERM_INFO, diff);
 
-    println!("[-] Image saved at: {:?}", output);
+    println!("{} Image saved at: {:?}", *TERM_INFO, output);
+
+    println!("");
+    println!("{} Done!", *TERM_OK);
 
 }
