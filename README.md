@@ -20,7 +20,7 @@ cargo install pixels-cli
 ## Usage
 
 ```bash
-pixels --input <input> --rename <filename> --quality <quality>
+pixels-cli --input <input> --rename <filename> --quality <quality>
 ```
 
 ## Options
@@ -28,7 +28,7 @@ pixels --input <input> --rename <filename> --quality <quality>
 - `--input` or `-i`: The input file or directory
 - `--rename` or `-r`: The new filename, only new filename without extension
 
-- `--quality` or `-q`: The quality of the image, from 1 to 80 (default 80), can be higher until 100, but it's not recommended because the file size will be too big.
+- `--quality` or `-q`: The quality of the image, from 1 to 80 (default 80), can be higher until 100, but it's not recommended for small images because the file size will be too big.
 
 ## Optional
 
